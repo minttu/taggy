@@ -1,9 +1,8 @@
-package me.pieso.taggy.db;
+package me.pieso.taggy.daos;
 
 import io.dropwizard.hibernate.AbstractDAO;
-import me.pieso.taggy.core.Image;
+import me.pieso.taggy.models.Image;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -47,5 +46,16 @@ public class ImageDAO extends AbstractDAO<Image> {
                 .setParameter("cursor", cursor)
                 .setMaxResults(25);
         return list(query);
+    }
+
+    public boolean hasAlreadyBeenUploaded(byte[] hash) {
+        Query query = currentSession().createQuery("FROM Image AS image WHERE image.hash = :hash")
+                .setParameter("hash", hash)
+                .setMaxResults(1);
+        return list(query).size() != 0;
+    }
+
+    public Image save(Image image) {
+        return persist(image);
     }
 }

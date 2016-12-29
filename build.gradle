@@ -38,5 +38,6 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: '1.0.5'
     compile group: 'io.dropwizard', name: 'dropwizard-hibernate', version: '1.0.5'
     compile group: 'io.dropwizard', name: 'dropwizard-migrations', version: '1.0.5'
+    compile group: 'io.dropwizard', name: 'dropwizard-forms', version: '1.0.5'
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
 }

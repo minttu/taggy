@@ -4,10 +4,13 @@
 
 CREATE TABLE image (
   id SERIAL PRIMARY KEY,
-  url VARCHAR(4096) NOT NULL,
-  thumbnail VARCHAR(4096)
+  created TIMESTAMP DEFAULT now(),
+  hash BYTEA UNIQUE
 );
 --rollback DROP TABLE image;
+
+CREATE INDEX image_hash_idx ON image(hash);
+--rollback DROP INDEX image_hash_idx;
 
 CREATE TABLE tag (
   name VARCHAR(128) PRIMARY KEY
@@ -21,5 +24,5 @@ CREATE TABLE image_tag (
 );
 --rollback DROP TABLE image_tag;
 
-CREATE INDEX tag_image ON image_tag(tag_name);
---rollback DROP INDEX tag_image;
+CREATE INDEX tag_image_idx ON image_tag(tag_name);
+--rollback DROP INDEX tag_image_idx;

@@ -1,8 +1,6 @@
-package me.pieso.taggy.core;
+package me.pieso.taggy.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -32,7 +30,7 @@ public class Tag {
         this.name = name;
     }
 
-    @JsonBackReference(value = "images-tags")
+    @JsonBackReference
     @ManyToMany(mappedBy = "tags")
     public Set<Image> getImages() {
         return images;

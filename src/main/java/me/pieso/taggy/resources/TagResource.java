@@ -2,9 +2,11 @@ package me.pieso.taggy.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.hibernate.UnitOfWork;
-import me.pieso.taggy.core.Tag;
-import me.pieso.taggy.db.TagDAO;
+import me.pieso.taggy.daos.TagDAO;
+import me.pieso.taggy.models.Tag;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -15,6 +17,14 @@ public class TagResource {
 
     public TagResource(TagDAO tagDAO) {
         this.tagDAO = tagDAO;
+    }
+
+    @POST
+    @Timed
+    @UnitOfWork
+    public Tag createTag(@NotNull @Valid Tag tagParameter) {
+        Tag tag = tagDAO.save(tagParameter);
+        return tag;
     }
 
     @GET

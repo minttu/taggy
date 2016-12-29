@@ -1,3 +1,4 @@
+fileStorageLocation: /srv/taggy/storage
 database:
   driverClass: org.postgresql.Driver
   user: taggy
