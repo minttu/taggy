@@ -1,6 +1,8 @@
 package me.pieso.taggy;
 
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.PooledDataSourceFactory;
@@ -22,6 +24,11 @@ public class TaggyApplication extends Application<TaggyConfiguration> {
         @Override
         public DataSourceFactory getDataSourceFactory(TaggyConfiguration configuration) {
             return configuration.getDataSourceFactory();
+        }
+
+        @Override
+        protected Hibernate5Module createHibernate5Module() {
+            return super.createHibernate5Module().disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
         }
     };
     private final MigrationsBundle<TaggyConfiguration> migrationsBundle = new MigrationsBundle<TaggyConfiguration>() {

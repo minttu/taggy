@@ -24,3 +24,7 @@ database:
 
   # whether or not idle connections should be validated
   checkConnectionWhileIdle: false
+server:
+  applicationConnectors:
+    - type: http
+      port: 2001

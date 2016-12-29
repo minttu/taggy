@@ -1,9 +1,12 @@
 package me.pieso.taggy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import me.pieso.taggy.json.serializers.HashSerializer;
 
 import javax.persistence.*;
+import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,6 +19,7 @@ public class Image {
     private long id;
     private byte[] hash;
     private Date created;
+    private String type;
 
     private Set<Tag> tags = new HashSet<Tag>();
 
@@ -23,8 +27,9 @@ public class Image {
 
     }
 
-    public Image(byte[] hash) {
+    public Image(byte[] hash, String type) {
         this.hash = hash;
+        this.type = type;
     }
 
     @Id
@@ -48,14 +53,31 @@ public class Image {
         this.created = created;
     }
 
+    @Transient
+    @JsonProperty
+    public String getImageURL() {
+        String hexHash = DatatypeConverter.printHexBinary(hash);
+        return "/static/image-full/" + hexHash + "." + type;
+    }
+
     @Column
-    @JsonSerialize(using = HashSerializer.class)
+    @JsonIgnore
     public byte[] getHash() {
         return hash;
     }
 
     public void setHash(byte[] hash) {
         this.hash = hash;
+    }
+
+    @Column
+    @JsonIgnore
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

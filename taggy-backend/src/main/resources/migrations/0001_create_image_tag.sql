@@ -5,7 +5,8 @@
 CREATE TABLE image (
   id SERIAL PRIMARY KEY,
   created TIMESTAMP DEFAULT now(),
-  hash BYTEA UNIQUE
+  hash BYTEA UNIQUE,
+  type VARCHAR(4)
 );
 --rollback DROP TABLE image;
 

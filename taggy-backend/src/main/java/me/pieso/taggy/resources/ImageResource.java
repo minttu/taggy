@@ -72,8 +72,7 @@ public class ImageResource {
         try {
             byte[] imageData = ByteStreams.toByteArray(inputStream);
             imageUpload = new ImageUpload(imageData);
-            imageUpload.verifyContentAsImage();
-            image = new Image(imageUpload.getHash());
+            image = new Image(imageUpload.getHash(), imageUpload.getType());
             dao.save(image); // Hash uniqueness is checked by schema
             imageService.save(imageUpload);
         } catch (IOException | NoSuchAlgorithmException e) {

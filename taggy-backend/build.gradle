@@ -33,11 +33,14 @@ repositories {
     mavenCentral()
 }
 
+def dropwizardVersion = '1.0.5'
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile group: 'io.dropwizard', name: 'dropwizard-core', version: '1.0.5'
-    compile group: 'io.dropwizard', name: 'dropwizard-hibernate', version: '1.0.5'
-    compile group: 'io.dropwizard', name: 'dropwizard-migrations', version: '1.0.5'
-    compile group: 'io.dropwizard', name: 'dropwizard-forms', version: '1.0.5'
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-hibernate', version: dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-migrations', version: dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-forms', version: dropwizardVersion
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
+    compile group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.9.1'
 }

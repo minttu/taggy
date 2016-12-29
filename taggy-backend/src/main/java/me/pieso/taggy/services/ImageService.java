@@ -26,7 +26,10 @@ public class ImageService {
 
     public void save(ImageUpload imageUpload) throws IOException {
         String hexHash = DatatypeConverter.printHexBinary(imageUpload.getHash());
-        File file = new File(Paths.get(fileStorageLocation, "image-full", hexHash).toUri());
+        File file = new File(Paths.get(fileStorageLocation,
+                "image-full",
+                hexHash + "." + imageUpload.getType()
+        ).toUri());
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(imageUpload.getData());
         fos.close();
