@@ -5,9 +5,11 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux'
 
-import App from 'components/App';
+import App from './components/App';
 import configureStore from './store/configure'
 import rootSaga from './sagas'
+
+import './styles/application.scss'
 
 const store = configureStore()
 store.runSaga(rootSaga)
