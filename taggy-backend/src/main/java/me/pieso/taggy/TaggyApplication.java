@@ -1,6 +1,5 @@
 package me.pieso.taggy;
 
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import io.dropwizard.Application;

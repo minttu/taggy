@@ -3,8 +3,11 @@ package me.pieso.taggy.services;
 import com.drew.imaging.FileType;
 import com.drew.imaging.FileTypeDetector;
 import me.pieso.taggy.exceptions.NonImageFileException;
+import org.imgscalr.Scalr;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -20,7 +23,7 @@ public class ImageUpload {
     public ImageUpload(byte[] data) throws NoSuchAlgorithmException, NonImageFileException {
         this.data = data;
         this.hash = calculateHash();
-        this.type = this.getImageType();
+        this.type = resolveImageType();
     }
 
     private byte[] calculateHash() throws NoSuchAlgorithmException {
@@ -28,24 +31,13 @@ public class ImageUpload {
         return digest.digest(data);
     }
 
-    public byte[] getData() {
-        return data;
-    }
 
-    public byte[] getHash() {
-        return hash;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getImageType() throws NonImageFileException {
+    private String resolveImageType() throws NonImageFileException {
         FileType fileType;
 
         try {
-            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(data));
-            if (bufferedImage == null) {
+            Image image = getImage();
+            if (image == null) {
                 throw new NonImageFileException();
             }
 
@@ -65,5 +57,29 @@ public class ImageUpload {
             default:
                 throw new NonImageFileException();
         }
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public byte[] getHash() {
+        return hash;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getHexHash() {
+        return DatatypeConverter.printHexBinary(getHash());
+    }
+
+    public BufferedImage getImage() throws IOException {
+        return ImageIO.read(new ByteArrayInputStream(data));
+    }
+
+    public BufferedImage getThumbnail() throws IOException {
+        return Scalr.resize(getImage(), Scalr.Method.AUTOMATIC, 200, 200);
     }
 }

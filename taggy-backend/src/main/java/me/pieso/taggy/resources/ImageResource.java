@@ -74,7 +74,8 @@ public class ImageResource {
             imageUpload = new ImageUpload(imageData);
             image = new Image(imageUpload.getHash(), imageUpload.getType());
             dao.save(image); // Hash uniqueness is checked by schema
-            imageService.save(imageUpload);
+            imageService.saveFull(imageUpload);
+            imageService.saveThumbnail(imageUpload);
         } catch (IOException | NoSuchAlgorithmException e) {
             throw new InternalServerErrorException(e);
         } catch (ConstraintViolationException e) {

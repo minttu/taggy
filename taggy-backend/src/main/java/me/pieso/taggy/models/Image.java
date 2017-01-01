@@ -2,8 +2,6 @@ package me.pieso.taggy.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import me.pieso.taggy.json.serializers.HashSerializer;
 
 import javax.persistence.*;
 import javax.xml.bind.DatatypeConverter;
@@ -58,6 +56,13 @@ public class Image {
     public String getImageURL() {
         String hexHash = DatatypeConverter.printHexBinary(hash);
         return "/static/image-full/" + hexHash + "." + type;
+    }
+
+    @Transient
+    @JsonProperty
+    public String getThumbnailURL() {
+        String hexHash = DatatypeConverter.printHexBinary(hash);
+        return "/static/image-thumbnail/" + hexHash + "." + type;
     }
 
     @Column
