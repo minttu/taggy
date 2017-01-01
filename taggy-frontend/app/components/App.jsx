@@ -1,11 +1,14 @@
 import React from 'react'
 
-import ThumbnailList from '../containers/ThumbnailList'
-
-export default class App extends React.Component {
-    render() {
-        return (
-            <ThumbnailList/>
-        )
-    }
+export default function App({ children }) {
+    return (
+        <div>
+            <nav>
+                <h1>taggy</h1>
+            </nav>
+            <div className="content">
+                {children}
+            </div>
+        </div>
+    )
 }

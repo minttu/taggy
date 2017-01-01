@@ -4,7 +4,8 @@ module.exports = {
     entry: './app/initialize.js',
     output: {
         filename: 'app.js',
-        path: './public'
+        path: './public',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['', '.js', '.jsx']

@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux'
-import { REQUEST_IMAGES, RECEIVE_IMAGES } from '../actions'
+import { routerReducer } from 'react-router-redux'
+
+import * as actions from '../actions'
 
 function images(state = {
     isFetching: false,
     items: []
 }, action) {
     switch(action.type) {
-        case REQUEST_IMAGES:
+        case actions.REQUEST_IMAGES:
             return Object.assign({}, state, { isFetching: true })
-        case RECEIVE_IMAGES:
+        case actions.RECEIVE_IMAGES:
             return Object.assign({}, state,
                 {
                     isFetching: false,
@@ -21,8 +23,35 @@ function images(state = {
     }
 }
 
+function image(state = {
+    isFetching: false,
+    image: {}
+}, action) {
+    switch(action.type) {
+        case actions.REQUEST_IMAGE:
+            return Object.assign({}, state,
+                {
+                    isFetching: true,
+                    image: {}
+                }
+            )
+        case actions.RECEIVE_IMAGE:
+            return Object.assign({}, state,
+                {
+                    isFetching: false,
+                    image: action.image,
+                    lastUpdated: action.receivedAt
+                }
+            )
+        default:
+            return state
+    }
+}
+
 const rootReducer = combineReducers({
-    images
+    images,
+    image,
+    routing: routerReducer
 })
 
 export default rootReducer

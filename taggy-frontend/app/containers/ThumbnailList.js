@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
+import * as actions from '../actions'
 import ThumbnailList from '../components/ThumbnailList'
 
 const mapStateToProps = (state) => {
@@ -9,7 +11,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        fetchImages: () => dispatch(actions.requestImages()),
+        openImage: (id) => dispatch(push(`/image/${id}/`))
+    }
 }
 
 const VisibleThumbnailList = connect(

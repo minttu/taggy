@@ -14,3 +14,22 @@ export function receiveImages(images) {
         receivedAt: Date.now()
     }
 }
+
+export const REQUEST_IMAGE = 'REQUEST_IMAGE'
+export const RECEIVE_IMAGE = 'RECEIVE_IMAGE'
+
+export function requestImage(id) {
+    return {
+        type: REQUEST_IMAGE,
+        id
+    }
+}
+
+export function receiveImage(id, image) {
+    return {
+        type: RECEIVE_IMAGE,
+        id,
+        image,
+        receivedAt: Date.now()
+    }
+}

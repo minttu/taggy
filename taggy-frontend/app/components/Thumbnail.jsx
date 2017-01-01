@@ -3,7 +3,7 @@ import React from 'react'
 export default class Thumbnail extends React.Component {
     render() {
         return (
-            <div className="thumbnail">
+            <div className="thumbnail" onClick={this.props.onClick}>
                 <img src={this.props.thumbnailURL}/>
             </div>
         )
@@ -11,5 +11,6 @@ export default class Thumbnail extends React.Component {
 }
 
 Thumbnail.propTypes = {
-    thumbnailURL: React.PropTypes.string
+    thumbnailURL: React.PropTypes.string,
+    onClick: React.PropTypes.func
 }
