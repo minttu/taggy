@@ -23,8 +23,7 @@ public class TagResource {
     @Timed
     @UnitOfWork
     public Tag createTag(@NotNull @Valid Tag tagParameter) {
-        Tag tag = tagDAO.save(tagParameter);
-        return tag;
+        return tagDAO.save(tagParameter);
     }
 
     @GET

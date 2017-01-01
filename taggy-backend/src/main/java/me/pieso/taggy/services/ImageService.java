@@ -68,6 +68,13 @@ public class ImageService {
         ImageIO.write(image, "gif", file);
     }
 
+    /**
+     * OpenJDK won't write jpgs of the default BufferedImage instances,
+     * they need to be created with the limited color space (no alpha)
+     * @param image
+     * @param file
+     * @throws IOException
+     */
     private void saveJPG(BufferedImage image, File file) throws IOException {
         BufferedImage convertedImg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
         convertedImg.getGraphics().drawImage(image, 0, 0, null);

@@ -45,7 +45,7 @@ public class ImageResource {
     @UnitOfWork
     public List<Image> getImages(@QueryParam("cursor") Optional<Long> cursor,
                                  @QueryParam("tags") Optional<String> tags) {
-        String[] tagList = Stream.of(tags.orElse("").split(",")).map(s -> s.trim()).filter(s -> s.length() > 0).toArray(size -> new String[size]);
+        String[] tagList = Stream.of(tags.orElse("").split(",")).map(String::trim).filter(s -> s.length() > 0).toArray(size -> new String[size]);
         long cursorValue = cursor.orElse(Long.MAX_VALUE);
         if (tagList.length > 0) {
             return dao.getImagesHavingTags(cursorValue, tagList);

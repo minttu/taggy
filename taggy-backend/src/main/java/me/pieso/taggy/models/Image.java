@@ -19,7 +19,7 @@ public class Image {
     private Date created;
     private String type;
 
-    private Set<Tag> tags = new HashSet<Tag>();
+    private Set<Tag> tags = new HashSet<>();
 
     public Image() {
 

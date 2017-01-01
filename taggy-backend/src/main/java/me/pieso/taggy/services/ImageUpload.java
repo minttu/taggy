@@ -75,7 +75,7 @@ public class ImageUpload {
         return DatatypeConverter.printHexBinary(getHash());
     }
 
-    public BufferedImage getImage() throws IOException {
+    private BufferedImage getImage() throws IOException {
         return ImageIO.read(new ByteArrayInputStream(data));
     }
 

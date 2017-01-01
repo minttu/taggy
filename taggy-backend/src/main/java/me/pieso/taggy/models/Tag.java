@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "tag")
 public class Tag {
     private String name;
-    private Set<Image> images = new HashSet<Image>();
+    private Set<Image> images = new HashSet<>();
 
     public Tag() {
     }
